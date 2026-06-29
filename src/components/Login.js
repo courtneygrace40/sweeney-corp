@@ -1,8 +1,22 @@
 
 // Login.js:
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import './Login.css';   
+import { Form, Button, Container, Alert } from 'react-bootstrap';
+import './Login.css'; 
+import { login } from '../api/auth'; // Import the login function from your API file
+import axios from 'axios'; // Import axios for making HTTP requests
+
+const API_URL = 'http://localhost:5000/api/login'; // Replace with your actual backend URL
+
+export const login = async (email, password) => {
+    try {
+        const response = await axios.post('${API_URL}/user', { email, password });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,16 +32,22 @@ function Login() {
     return newErrors;
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
         setErrors(formErrors);
     } else {
         setErrors({});
-        console.log('Login attempted with:', { email, password });
+        try {
+            const userData = await login(email, password);
+            console.log('Login successful:', userData);
+            // Handle successful login (e.g., redirect, store token, etc.)
+        } catch (error) {
+            setErrors({ form: 'Login failed. Please try again.' });
+        }
     }
-  };
+};
 
   return (
    <div className="login-wrapper">
@@ -71,6 +91,7 @@ function Login() {
     </div>
             
   );
-}
+} 
+
 
 export default Login;
