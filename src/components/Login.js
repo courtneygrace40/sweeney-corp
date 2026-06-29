@@ -7,7 +7,7 @@ import './Login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setErrors] = useState('');
 
   const validateForm = () => {
     const newErrors = {};
@@ -62,7 +62,7 @@ function Login() {
                 {errors.password}
               </Form.Control.Feedback>
             </Form.Group>
-            
+
             <Button variant="primary" type="submit" className="login-button">
             Login
           </Button>
