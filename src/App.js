@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 // src/App.jsx
 import Login from './components/Login.js'; // Adjust the path depending on where your file is
