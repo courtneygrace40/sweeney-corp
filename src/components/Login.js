@@ -8,7 +8,7 @@ import axios from 'axios'; // Import axios for making HTTP requests
 
 const API_URL = 'http://localhost:5000/api/login'; // Replace with your actual backend URL
 
-export const login = async (email, password) => {
+export const handleLogin = async (email, password) => {
     try {
         const response = await axios.post('${API_URL}/user', { email, password });
         return response.data;
@@ -40,7 +40,7 @@ function Login() {
     } else {
         setErrors({});
         try {
-            const userData = await login(email, password);
+            const userData = await handleLogin(email, password);
             console.log('Login successful:', userData);
             // Handle successful login (e.g., redirect, store token, etc.)
         } catch (error) {
