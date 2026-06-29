@@ -7,7 +7,7 @@ import './Login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setErrors] = useState('');
+  const [errors, setErrors] = useState('');
 
   const validateForm = () => {
     const newErrors = {};
