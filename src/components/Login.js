@@ -22,6 +22,8 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState('');
+  const { login } = useAuth(); // Assuming you have a useAuth hook for authentication context
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
@@ -41,6 +43,7 @@ function Login() {
         setErrors({});
         try {
             const userData = await handleLogin(email, password);
+            navigate('/profile'); // Redirect to profile page after successful login
             console.log('Login successful:', userData);
             // Handle successful login (e.g., redirect, store token, etc.)
         } catch (error) {
