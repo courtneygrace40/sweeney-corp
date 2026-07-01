@@ -5,13 +5,18 @@ import { Form, Button, Container, Alert } from 'react-bootstrap';
 import './Login.css'; 
 import { Auth } from '../Auth.jsx'; // Import the login function from your API file
 import axios from 'axios'; // Import axios for making HTTP requests
-
-const API_URL = 'http://localhost:5000/api/login'; // Replace with your actual backend URL
+import { supabase } from './supabaseClient'; // Ensure this points to your client file
 
 export const handleLogin = async (email, password) => {
     try {
-        const response = await axios.post('${API_URL}/user', { email, password });
-        return response.data;
+        // Supabase handles the session and security tokens automatically
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+
+        if (error) throw error;
+        return data;
     } catch (error) {
         throw error;
     }
