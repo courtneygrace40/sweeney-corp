@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import './Login.css'; 
-import { login } from '../api/auth'; // Import the login function from your API file
+import { Auth } from '../Auth.jsx'; // Import the login function from your API file
 import axios from 'axios'; // Import axios for making HTTP requests
 
 const API_URL = 'http://localhost:5000/api/login'; // Replace with your actual backend URL
